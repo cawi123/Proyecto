@@ -283,5 +283,305 @@ class Bala ( MiSprite ):
                 return
                 
         MiSprite.update(self)
+   
   
+  
+class Marcador (MiSprite):
+    def __init__(self, pacman):
+        MiSprite.__init__(self)
+        self.pacman = pacman
+        self.font = pygame.font.SysFont("Arial", 20)
+        self.rect = pygame.rect.Rect(0,0,0,0)
+
+    
+    def update(self):
+        self.texto = 'vidas: %d                 puntos: %d                 disparos: %d' % (self.pacman.vidas, self.pacman.puntos, self.pacman.disparos)
+        self.image = self.font.render(self.texto, 1, (255, 255, 0))
+        self.rect = self.image.get_rect()
+        
+        #situamos al marcador en la esquina inferior derecha
+        self.rect.topleft = (pygame.display.get_surface().get_width() - 600, 
+                     pygame.display.get_surface().get_height() - 600)
+        print ("Su puntaje es " ,str ( self.pacman.puntos))
+        MiSprite.update (self)
+
+   
+
+class Mensaje (MiSprite):
+    def __init__(self, texto, posicion = None, dim_font = 60, tiempo = 0 ):
+
+        MiSprite.__init__(self)
+
+        self.texto = texto
+        self.font = pygame.font.SysFont("None", dim_font)
+        self.image = self.font.render(self.texto, 1, (255, 255, 0))
+        self.rect = self.image.get_rect()
+        self.tiempo = tiempo
+        if self.tiempo > 0:
+            self.inicio = pygame.time.get_ticks()
+        
+        if posicion is None:
+            posicion =[(pygame.display.get_surface().get_width() - self.rect.width ) / 2, 
+                        (pygame.display.get_surface().get_height() - self.rect.height ) / 2 ]
+        
+        self.rect.topleft = posicion
+
+    
+    def update(self):
+        MiSprite.update (self)
+        if self.tiempo > 0 and pygame.time.get_ticks() - self.inicio > self.tiempo:
+            self.kill()
+
+
+def ManejarEventos():
+    global eventos # explicitamente declaramos que "eventos" es una variable global
+    for event in eventos: 
+      
+        if event.type == pygame.QUIT: 
+            sys.exit(0) #se termina el programa
+        
+     
+imagenes = {}
+def cargar_imagen ( fichero_imagen ):
+    global imagenes
+    imagen = imagenes.get ( fichero_imagen, None )
+    if imagen is None:
+        imagen = pygame.image.load(os.path.join("imagenes",fichero_imagen)).convert()
+        imagenes[fichero_imagen] = imagen
+        imagen.set_colorkey (  imagen.get_at((0,0)) , pygame.RLEACCEL )
+    return imagen
+
+
+sonidos = {}
+def cargar_sonido ( fichero_sonido ):
+    global sonidos
+    sonido = sonidos.get ( fichero_sonido, None )
+    if sonido is None:
+        sonido = pygame.mixer.Sound ( os.path.join ("sonidos", fichero_sonido))
+        sonidos[fichero_sonido] = sonido
+    return sonido
+
+
+def kill(sprite):
+    cargar_sonido("kill.wav").play()
+    sprite.kill()
+  
+  
+def game_over():
+    '''El juego finaliza cuando no exista ningun pacman o fantasma'''
+    existen_fantasmas = existen_pacman = False
+    for sprite in sprites:
+        if isinstance(sprite, Fantasma):
+            existen_fantasmas = True
+        elif isinstance (sprite, Pacman):
+            existen_pacman = True
+    
+    return not ( existen_fantasmas and existen_pacman )
+ 
+def informar ( posicion, texto ):
+    mensaje = Mensaje ( texto, posicion, 20, 2000)
+    sprites.add ( mensaje )
+    
+class Opcion:
+
+    def __init__(self, fuente, titulo, x, y, paridad, funcion_asignada):
+        self.imagen_normal = fuente.render(titulo, 1, (0, 0, 0))
+        self.imagen_destacada = fuente.render(titulo, 1, (200, 0, 0))
+        self.image = self.imagen_normal
+        self.rect = self.image.get_rect()
+        self.rect.x = 500 * paridad
+        self.rect.y = y
+        self.funcion_asignada = funcion_asignada
+        self.x = float(self.rect.x)
+
+    def actualizar(self):
+        destino_x = 105
+        self.x += (destino_x - self.x) / 5.0
+        self.rect.x = int(self.x)
+
+    def imprimir(self, screen):
+        screen.blit(self.image, self.rect)
+
+    def destacar(self, estado):
+        if estado:
+            self.image = self.imagen_destacada
+        else:
+            self.image = self.imagen_normal
+
+    def activar(self):
+        self.funcion_asignada()
+
+
+class Cursor:
+
+    def __init__(self, x, y, dy):
+        self.image = pygame.image.load('cursor.png').convert_alpha()
+        self.rect = self.image.get_rect()
+        self.rect.x = x
+        self.y_inicial = y
+        self.dy = dy
+        self.y = 0
+        self.seleccionar(0)
+
+    def actualizar(self):
+        self.y += (self.to_y - self.y) / 10.0
+        self.rect.y = int(self.y)
+
+    def seleccionar(self, indice):
+        self.to_y = self.y_inicial + indice * self.dy
+
+    def imprimir(self, screen):
+        screen.blit(self.image, self.rect)
+
+
+class Menu:
+    
+    def __init__(self, opciones):
+        self.opciones = []
+    #Archivo de fuente del menu
+        fuente = pygame.font.Font('dejavu.ttf', 20)
+        x = 105
+        y = 105
+        paridad = 1
+
+        self.cursor = Cursor(x - 30, y, 30)
+
+        for titulo, funcion in opciones:
+            self.opciones.append(Opcion(fuente, titulo, x, y, paridad, funcion))
+            y += 30
+            if paridad == 1:
+                paridad = -1
+            else:
+                paridad = 1
+
+        self.seleccionado = 0
+        self.total = len(self.opciones)
+        self.mantiene_pulsado = False
+
+    def actualizar(self):
+        k = pygame.key.get_pressed()
+
+        if not self.mantiene_pulsado:
+            if k[K_UP]:
+                self.seleccionado -= 1
+            elif k[K_DOWN]:
+                self.seleccionado += 1
+            elif k[K_RETURN]:
+                # Invoca a la función asociada a la opción.
+                self.opciones[self.seleccionado].activar()
+
+        # procura que el cursor esté entre las opciones permitidas
+        if self.seleccionado < 0:
+            self.seleccionado = 0
+        elif self.seleccionado > self.total - 1:
+            self.seleccionado = self.total - 1
+        
+        self.cursor.seleccionar(self.seleccionado)
+
+        # indica si el usuario mantiene pulsada alguna tecla.
+        self.mantiene_pulsado = k[K_UP] or k[K_DOWN] or k[K_RETURN]
+
+        self.cursor.actualizar()
+     
+        for o in self.opciones:
+            o.actualizar()
+
+    def imprimir(self, screen):
+
+        self.cursor.imprimir(screen)
+
+        for opcion in self.opciones:
+            opcion.imprimir(screen)
+def comenzar_nuevo_juego():
+    print(" Función que muestra un nuevo juego.")
+    main()
+ 
+def mostrar_opciones():
+    print ("Función que muestra otro menú de opciones.")
+
+def creditos():
+    print ("Función que muestra los creditos del programa.")
+
+def salir_del_programa():
+    import sys
+    print (" Gracias por utilizar este programa.")
+    sys.exit(0) 
+def main():
+    global sprites,eventos,screem
+    #inicializamos pygame y la pantalla de juego
+    pygame.init()
+    
+    #Indicamos la dimension de la pantlla de juego
+    window = pygame.display.set_mode([900,600])
+    pygame.display.set_caption("pacman")  
+
+    #Inicializamos la pantalla con fondo negro
+    screen = pygame.display.get_surface()
+    screen.fill ([0,0,0])
+    
+    #creamos una copia de la pantalla para evitar su repintado completo cuando
+    #    se redibujen los sprites
+    background = screen.copy()
+
+
+    #creamos los sprites
+    sprites = pygame.sprite.RenderUpdates()
+    
+    pacman = Pacman("pacman.gif", [21,42])
+    sprites.add ( pacman )
+    
+    sprite = Fantasma("fantasma.gif",[100,100], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma.gif",[750,45], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma.gif",[20,150], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma.gif",[20,400], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+
+    sprite = Fantasma("fantasma1.png",[500,600], [20, 10] )
+    sprite.puntos = 300
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma1.png",[610,100], [10, 10] )
+    sprite.puntos = 300
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma1.png",[420,50], [10, 10] )
+    sprite.puntos = 300
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma1.png",[80,580], [10, 10] )
+    sprite.puntos = 300
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[220,150], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[230,350], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[700,350], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[450,350], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[320,350], [1, 1] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma2.png",[690,400], [1, 2] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma.gif",[750,430], [1, 2] )
+    sprite.puntos = 100
+    sprites.add ( sprite )
+    sprite = Fantasma("fantasma1.png",[660,220], [1, 0] )
+    sprite.puntos = 300
+    sprites.add ( sprite )
+    sprite = Fantasma("pacmanevil.png",[305,510], [0, 0] )
+    sprite.puntos = 1000
+    sprites.add ( sprite )
+    
+
     
