@@ -584,4 +584,265 @@ def main():
     sprites.add ( sprite )
     
 
+    sprite = Pared ( [150,150,150], [0,30], [900,10] )#-|..--
+    sprites.add ( sprite )
+
+    sprite = Pared ( [150,150,150], [140,30], [10,140] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [60,160], [90,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [730,110], [10,50] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [0,110], [70,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [0,210], [120,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [120,210], [10,130] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [120,270], [130,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [170,270], [10,110] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [170,380], [130,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [230,315], [140,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [370,220], [10,230] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [370,220], [200,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [570,160], [10,70] )#|
+    sprites.add ( sprite )#falsa
+    sprite = Pared ( [150,150,150], [430,280], [150,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [430,280], [10,100] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [60,270], [10,170] )#|
+    sprites.add ( sprite )#fantasma
+    sprite = Pared ( [150,150,150], [60,385], [50,10] )#|
+    sprites.add ( sprite )
+
+    sprite = Pared ( [150,150,150], [200,30], [10,170] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [200,200], [100,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [300,160], [10,100] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [300,160], [220,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [520,110], [10,60] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [580,160], [80,10] )#-
+    sprites.add ( sprite )
+    #trampa1
+    sprite = Pared ( [250,150,150], [530,160], [80,10] )#-
+    sprites.add ( sprite )
+
     
+    sprite = Pared ( [150,150,150], [730,160], [80,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [650,80], [10,80] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [590,80], [90,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared2 ( [250,150,150], [680,40], [10,50] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [460,30], [10,70] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [250,110], [150,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [250,150,150], [300,120], [10,40] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [320,30], [10,50] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [250,150,150], [250,70], [10,40] )#|
+    sprites.add ( sprite )
+
+    
+    sprite = Pared ( [150,150,150], [400,50], [10,70] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [250,30], [10,40] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [190,440], [10,70] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [60,440], [140,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [260,440], [110,10] )#-
+    sprites.add ( sprite )#pared
+    sprite = Pared ( [150,150,150], [250,500], [200,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [450,430], [10,80] )#|
+    sprites.add ( sprite )#pared
+    #trampa2
+    sprite = Pared2 ( [250,150,150], [250,440], [10,60] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [250,150,150], [450,430], [150,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [600,430], [10,90] )#|
+    sprites.add ( sprite )
+    #trampa
+    sprite = Pared2 ( [250,150,150], [600,515], [10,80] )#|
+    sprites.add ( sprite )
+    
+    sprite = Pared ( [150,150,150], [525,340], [10,90] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [525,340], [200,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [660,260], [10,80] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [660,260], [100,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared2 ( [250,150,150], [660,160], [80,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [760,210], [10,60] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [250,150,150], [760,170], [10,40] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [790,90], [110,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [810,210], [90,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [250,150,150], [580,280], [10,60] )#|
+    sprites.add ( sprite )
+    ####
+    sprite = Pared2 ( [250,150,150], [570,222], [10,65] )#|
+    sprites.add ( sprite )
+    
+    sprite = Pared ( [150,150,150], [0,500], [130,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [130,500], [10,70] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [60,550], [10,50] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [250,500], [10,100] )#|
+    sprites.add ( sprite )#fantasma
+    sprite = Pared ( [150,150,150], [400,500], [10,50] )#|
+    sprites.add ( sprite )#fantasma M
+    sprite = Pared ( [150,150,150], [530,500], [10,100] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [660,500], [10,100] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [660,500], [150,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [600,430], [70,10] )#-
+    sprites.add ( sprite )#fantasma
+    sprite = Pared ( [150,150,150], [730,400], [10,100] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [730,400], [100,10] )#-
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [830,320], [10,90] )#|
+    sprites.add ( sprite )
+    sprite = Pared ( [150,150,150], [720,555], [100,10] )#-
+    sprites.add ( sprite )#vida
+    
+    
+   #items o premios
+    sprite = MiSprite ("fruta.gif", [0, 80])
+    sprite.comestible = True
+    sprite.puntos = 10
+    sprites.add ( sprite )
+
+    sprite = MiSprite ("fruta.gif", [220, 50])
+    sprite.comestible = True
+    sprite.puntos = 10
+    sprites.add ( sprite )
+    sprite = MiSprite ("fruta2.gif", [870, 350])
+    sprite.comestible = True
+    sprite.puntos = 20
+    sprites.add ( sprite )
+    sprite = MiSprite ("fruta0.gif", [300, 420])
+    sprite.comestible = True
+    sprite.puntos = 15
+    sprites.add ( sprite )
+ 
+    sprite = MiSprite ("bola.gif", [30, 330])
+    sprite.comestible = True
+    sprite.puntos = 5
+    sprite.disparos = 20
+    sprites.add ( sprite )
+    sprite = MiSprite ("bola.gif", [780, 140])
+    sprite.comestible = True
+    sprite.puntos = 5
+    sprite.disparos = 20
+    sprites.add ( sprite )
+    sprite = MiSprite ("bola.gif", [220, 170])
+    sprite.comestible = True
+    sprite.puntos = 5
+    sprite.disparos = 20
+    sprites.add ( sprite )
+    sprite = MiSprite ("vida.png", [5, 580])
+    sprite.comestible = True
+    sprite.vidas = 2
+    sprites.add ( sprite )
+    sprite = MiSprite ("vida.png", [470, 50])
+    sprite.comestible = True
+    sprite.vidas = 2
+    sprites.add ( sprite )
+    sprite = MiSprite ("vida.png", [760, 575])
+    sprite.comestible = True
+    sprite.vidas = 2
+    sprites.add ( sprite )
+       
+    
+    marcador = Marcador ( pacman )
+    sprites.add ( marcador )
+
+       
+    #bucle de redibujado de los screens
+    reloj = pygame.time.Clock() 
+      
+    sonido_fondo = cargar_sonido ("sonido_fondo.wav").play(-1) #este sonido se repetira indefinidamente al indicar -1 como parametro   
+    while not game_over(): 
+        eventos = pygame.event.get()
+        ManejarEventos ()
+        
+        sprites.update ()
+        sprites.clear (screen, background) 
+        pygame.display.update (sprites.draw (screen))        
+        
+        reloj.tick (40) #tiempo de espera entre frames
+    
+    #el juego ha finalizado
+    sonido_fondo.stop()
+    cargar_sonido ( "game_over.wav" ).play()
+    sprites.add ( Mensaje ( "Game over" ) )    
+    pygame.display.update (sprites.draw (screen))  
+  
+    #esperamos un cierto tiempo para que se pueda ver lo que ha ocurrido al final del juego
+    pygame.time.delay(2000)
+
+    sprites.empty()    
+    sprites.add ( Mensaje ( "Game over" ) )    
+    screen.fill ([0,0,0])
+    pygame.display.update(sprites.draw(screen))
+    cargar_sonido ( "game_over.wav" ).play(2)
+    
+    while True:
+        eventos = pygame.event.get()
+        ManejarEventos()
+if __name__ == '__main__':
+    salir = False
+    opciones = [
+        ("Jugar", comenzar_nuevo_juego),
+       # ("Opciones", mostrar_opciones),
+       # ("Creditos", creditos),
+        ("Salir", salir_del_programa)
+        ]
+
+    pygame.font.init()
+    screen = pygame.display.set_mode((320, 240))
+    fondo = pygame.image.load("fondo.png").convert()
+    menu = Menu(opciones)
+    
+
+    while not salir:
+        for e in pygame.event.get():
+            if e.type == QUIT:
+                salir = True
+
+        screen.blit(fondo, (0, 0))
+        menu.actualizar()
+        menu.imprimir(screen)
+
+        pygame.display.flip()
+        pygame.time.delay(10)
